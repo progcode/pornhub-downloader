@@ -11,7 +11,7 @@ function NodeJS(url) {
 
     // first "if" checks if url is present, second "if" checks if url is a valid(ish) pornhub link
     if (!url) return console.log("No url provided");
-    if (!/^https:\/\/(\w{1,3}\.)?pornhub\.com\/view_video\.php\?viewKey=\w+$/i.test(url)) return console.log("Invalid url");
+    if (!/^https:\/\/(\w{1,3}\.)?pornhub\.com\/view_video\.php\?viewkey=\w+$/i.test(url)) return console.log("Invalid url");
 
     // user_agent is for https request (pornhub refuses connection if user agent is missing)
     const {get:https} = require("https"), download_arg = process.argv.find(arg => arg.startsWith("download="));
