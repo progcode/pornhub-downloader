@@ -24,11 +24,10 @@ Downloads videos from pornhub using nodejs or browser
     3.2 Paste url inside the `""`
 3. Open a command prompt in the directory `main.js`is in (or `cd` into it)
 4. Download Options `add url in code (step 3) or pass it using url=URL_HERE`  
-    5.1 `node main.js download=all` download all qualities  
-    5.2 `node main.js download=highest` download highest quality  
-    5.3 `node main.js download=lowest` download lowest quality  
-    5.4 `node main.js download=[quality]` download provided quality (1080p, 720p, 480p, 240p)  
-    5.5 `node main.js` download highest by default
+    5.1 `node main.js download=highest` download highest quality  
+    5.2 `node main.js download=lowest` download lowest quality  
+    5.3 `node main.js download=[quality]` download provided quality (1080p, 720p, 480p, 240p)  
+    5.4 `node main.js` download highest by default
 
 ##### Download Examples
 ```
