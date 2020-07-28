@@ -35,13 +35,13 @@ function NodeJS(url) {
         if (response.statusCode !== 200) return console.log(`Unexpected ${response.statusCode} (${response.statusMessage})`);
         let html = ""; // gets page source
         response.on("data", chunk => html += chunk).on("end", function() {
-            const matches = html.match(/\*\/\w+/g), urls = []; // pornhub stores urls in a gross way so I *need* regular expression
+            const matches = html.match(/(?<=\*\/)\w+/g), urls = []; // pornhub stores urls in a gross way so I *need* regular expression
                     // this ^ pattern matches each variable that contain a part of a download url
+                    // The variable will be clean in the same regex
             for (let index = 0; index < matches.length; index++) { // loops through each match
-                // var_ is the variable name cleaned from any non-alphabetical/numeric characters
-                const var_ = matches[index].replace(/(?![a-z|0-9])./ig, ""), regex = new RegExp(var_ + "=\".*\";", "g"); // <- new regex pattern using the variable name
-                const result = html.match(regex)[0].split(";")[0].replace(var_ + "=", ""), value = result.replace(/["+ ]/g, ""); // cleans variable value
-                // ^ because im a noob with regex the pattern matches a lot of things but the content before the first ";" is what I need
+                const regex = new RegExp('(?<=' + matches[index] + '=")[^;]+(?=")', "g"); // <- new regex pattern using the variable name
+                const value = html.match(regex)[0].replace(/[" + "]/g, ""); // cleans variable value
+                // Return only the value inside the variable
                 if (value.startsWith("https")) { // if the result starts with "https" it means the previous variable has ended
                     if (urls.length === 4) break; // this caps at 4 because there's only 4 possible download links
                     urls.push(value); // pushes the current value to start a new link
